@@ -84,3 +84,29 @@ export function dayKey(ts: number): string {
   const d = new Date(ts);
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
+
+/* ---------------- Supabase merge (remote wins per record) ---------------- */
+
+import type { RemoteSnapshot } from "./supabase";
+
+export function mergeRemote(local: DB, remote: RemoteSnapshot): DB {
+  const merged: DB = { ...local };
+  if (remote.products && remote.products.length > 0) merged.products = remote.products;
+  if (remote.orders && remote.orders.length > 0) {
+    const map = new Map(local.orders.map((o) => [o.id, o]));
+    remote.orders.forEach((o) => map.set(o.id, o));
+    merged.orders = [...map.values()].sort((a, b) => b.createdAt - a.createdAt);
+  }
+  if (remote.reviews && remote.reviews.length > 0) {
+    const map = new Map(local.reviews.map((r) => [r.id, r]));
+    remote.reviews.forEach((r) => map.set(r.id, r));
+    merged.reviews = [...map.values()];
+  }
+  if (remote.offer) merged.offer = remote.offer;
+  if (remote.ledger && remote.ledger.length > 0) {
+    const map = new Map(local.ledger.map((l) => [l.m, l]));
+    remote.ledger.forEach((l) => map.set(l.m, l));
+    merged.ledger = [...map.values()];
+  }
+  return merged;
+}

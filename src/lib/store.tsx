@@ -7,8 +7,18 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { loadDB, newOrderId, saveDB } from "./db";
+import { loadDB, mergeRemote, newOrderId, saveDB } from "./db";
 import { buildTotals } from "./seed";
+import {
+  sbEnabled,
+  sbHasSession,
+  sbInvalidateSnapshot,
+  sbOnAuthChange,
+  sbPullAll,
+  sbPushAll,
+  sbSignIn,
+  sbSignOut,
+} from "./supabase";
 import type {
   CartItem,
   Category,
@@ -73,8 +83,9 @@ interface StoreValue {
   markOrdered: () => void;
 
   authed: boolean;
-  login: (u: string, p: string) => boolean;
+  login: (u: string, p: string) => Promise<boolean>;
   logout: () => void;
+  cloudConnected: boolean;
 
   toasts: ToastMsg[];
   toast: (msg: string, kind?: "ok" | "warn") => void;
@@ -264,20 +275,61 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     }));
   }, []);
 
-  /* ---------------- auth ---------------- */
-  const login = useCallback((u: string, p: string) => {
-    if (u.trim().toLowerCase() === "admin" && p === "mithai2026") {
-      setAuthed(true);
-      localStorage.setItem("tm_admin", "1");
-      return true;
-    }
-    return false;
-  }, []);
+  /* ---------------- auth (Supabase when configured, local demo fallback) ---------------- */
+  const login = useCallback(
+    async (u: string, p: string): Promise<boolean> => {
+      if (sbEnabled() && u.includes("@")) {
+        const res = await sbSignIn(u.trim(), p);
+        if (res.ok) {
+          setAuthed(true);
+          localStorage.setItem("tm_admin", "1");
+          sbInvalidateSnapshot();
+          const remote = await sbPullAll();
+          if (remote) setData((d) => mergeRemote(d, remote));
+          return true;
+        }
+        toast(`Supabase: ${res.error}`, "warn");
+      }
+      // local demo / emergency fallback
+      if (u.trim().toLowerCase() === "admin" && p === "mithai2026") {
+        setAuthed(true);
+        localStorage.setItem("tm_admin", "1");
+        return true;
+      }
+      return false;
+    },
+    [toast],
+  );
 
   const logout = useCallback(() => {
     setAuthed(false);
     localStorage.removeItem("tm_admin");
+    if (sbEnabled()) void sbSignOut();
   }, []);
+
+  /* ---------------- Supabase sync (only when keys are configured) ---------------- */
+  useEffect(() => {
+    if (!sbEnabled()) return;
+    let cancelled = false;
+    sbHasSession().then((has) => {
+      if (!cancelled && has) setAuthed(true);
+    });
+    const unsub = sbOnAuthChange((has) => {
+      if (cancelled) return;
+      if (!has) setAuthed(false);
+    });
+    sbPullAll().then((remote) => {
+      if (!cancelled && remote) setData((d) => mergeRemote(d, remote));
+    });
+    return () => {
+      cancelled = true;
+      unsub();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (sbEnabled()) sbPushAll(data);
+  }, [data]);
 
   const value: StoreValue = {
     products: data.products,
@@ -317,6 +369,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     updateOffer,
     addReview,
     reviewAction,
+    cloudConnected: sbEnabled(),
   };
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
