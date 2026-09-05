@@ -362,18 +362,20 @@ export function Mandala({ className = "", style }: { className?: string; style?:
   );
 }
 
+export const LOGO_URL =
+  "https://image.qwenlm.ai/generated-images/9662ae9f-3afa-4ce7-869e-ca884858a121/_result.png";
+
 export function DiyaLogo({ size = 40 }: { size?: number }) {
   return (
-    <svg viewBox="0 0 64 64" width={size} height={size} aria-hidden="true">
-      <rect width="64" height="64" rx="16" fill="var(--color-maroon-700)" />
-      <path d="M14 40h36c0 8-8 13-18 13S14 48 14 40z" fill="var(--color-gold-400)" />
-      <path d="M14 40h36l-3 4H17z" fill="var(--color-saffron-500)" />
-      <circle cx="32" cy="30" r="9" fill="var(--color-saffron-400)" className="flicker" />
-      <path d="M32 14c4 6-5 8-2 14" stroke="var(--color-cream-100)" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-      <circle cx="25" cy="47" r="1.6" fill="var(--color-maroon-700)" />
-      <circle cx="32" cy="49" r="1.6" fill="var(--color-maroon-700)" />
-      <circle cx="39" cy="47" r="1.6" fill="var(--color-maroon-700)" />
-    </svg>
+    <img
+      src={LOGO_URL}
+      alt=""
+      aria-hidden="true"
+      width={size}
+      height={size}
+      draggable={false}
+      className="rounded-2xl object-cover shrink-0 select-none ring-1 ring-gold-500/40 shadow-card"
+    />
   );
 }
 
