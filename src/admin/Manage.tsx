@@ -575,7 +575,7 @@ export function OffersPanel() {
       </form>
 
       <Reveal delay={120}>
-        <div className="ticket-notch bg-maroon-800 pattern-maroon rounded-2xl p-8 text-center border border-gold-500/30 shadow-warm">
+        <div className="bg-maroon-800 pattern-maroon rounded-2xl p-8 text-center border border-gold-500/30 shadow-warm overflow-hidden">
           <p className="font-telugu text-saffron-400">లైవ్ ప్రివ్యూ</p>
           <h3 className="font-display text-3xl text-cream-100 mt-1">{f.title || "Special Offer"}</h3>
           <p className="font-display text-6xl text-saffron-400 mt-3">{f.pct || 0}%</p>
