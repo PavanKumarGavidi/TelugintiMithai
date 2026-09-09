@@ -89,7 +89,7 @@ export function Hero() {
 
         <div className="lg:col-span-6 relative">
           <Reveal delay={150} className="relative max-w-md mx-auto lg:max-w-none">
-            <div style={{ transform: "scale(0.98)" }}>
+            <div style={{ transform: "scale(0.96) translateY(94px)" }}>
             <div className="absolute inset-0 translate-x-4 translate-y-4 arch border-2 border-gold-500/50 pointer-events-none" />
             <div className="arch border border-gold-500/70 bg-cream-50 p-3 shadow-warm">
               <div className="arch overflow-hidden aspect-[4/5]">
