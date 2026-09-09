@@ -174,8 +174,8 @@ export function Offers() {
   };
 
   return (
-    <section id="offers" className="bg-maroon-800 pattern-maroon relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-20 grid lg:grid-cols-2 gap-12 items-center">
+    <section id="offers" className="bg-maroon-800 pattern-maroon relative">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-20 grid lg:grid-cols-2 gap-12 items-start">
         <Reveal>
           <div className="relative">
             <div className="ticket-notch bg-cream-50 rounded-2xl shadow-warm px-8 py-9 md:px-10">
@@ -215,12 +215,12 @@ export function Offers() {
         <div className="mt-8 grid sm:grid-cols-2 gap-4">
           {TRUST.map((t, i) => (
             <Reveal key={t.title} delay={i * 100}>
-              <div className="group bg-maroon-700/45 border border-gold-500/25 rounded-xl p-5 hover:border-saffron-400/70 hover:-translate-y-1 transition-all duration-300 h-full">
-                <span className="inline-grid place-items-center w-12 h-12 rounded-full bg-saffron-500/15 text-saffron-400 group-hover:bg-saffron-500 group-hover:text-maroon-900 transition-colors">
+              <div className="group bg-maroon-700/60 border-2 border-gold-500/40 rounded-xl p-5 hover:border-saffron-400 hover:-translate-y-1 transition-all duration-300">
+                <span className="inline-grid place-items-center w-12 h-12 rounded-full bg-saffron-500/20 text-saffron-400 group-hover:bg-saffron-500 group-hover:text-maroon-900 transition-colors">
                   <t.icon size={24} />
                 </span>
                 <h4 className="font-display text-lg text-cream-100 mt-3.5">{t.title}</h4>
-                <p className="text-sm text-cream-200/75 mt-1 leading-relaxed">{t.sub}</p>
+                <p className="text-sm text-cream-200/80 mt-1 leading-relaxed">{t.sub}</p>
               </div>
             </Reveal>
           ))}
