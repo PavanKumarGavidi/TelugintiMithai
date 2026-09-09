@@ -26,11 +26,11 @@ export function Hero() {
   };
 
   return (
-    <section className="relative overflow-hidden pattern-paisley">
+    <section className="relative overflow-hidden pattern-paisley lg:-mt-16">
       <Mandala className="absolute -top-28 -right-28 w-[420px] h-[420px] text-gold-500/50 spin-slow pointer-events-none" />
       <Mandala className="absolute -bottom-40 -left-40 w-[380px] h-[380px] text-maroon-600/20 pointer-events-none" style={{ animationDirection: "reverse" }} />
 
-      <div className="max-w-7xl mx-auto px-4 md:px-6 pt-6 pb-16 lg:pt-4 lg:pb-20 grid lg:grid-cols-12 gap-12 lg:gap-8 items-center relative">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 pt-6 pb-16 lg:pt-0 lg:pb-20 grid lg:grid-cols-12 gap-12 lg:gap-8 items-center relative">
         <div className="lg:col-span-6 relative z-10">
           <Reveal>
             <p className="flex items-center gap-3 font-telugu text-xl md:text-2xl text-maroon-600">
