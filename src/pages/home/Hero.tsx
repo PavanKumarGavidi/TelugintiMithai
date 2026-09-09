@@ -26,11 +26,11 @@ export function Hero() {
   };
 
   return (
-    <section className="relative overflow-hidden pattern-paisley lg:-mt-[26px]">
+    <section className="relative overflow-hidden pattern-paisley">
       <Mandala className="absolute -top-28 -right-28 w-[420px] h-[420px] text-gold-500/50 spin-slow pointer-events-none" />
       <Mandala className="absolute -bottom-40 -left-40 w-[380px] h-[380px] text-maroon-600/20 pointer-events-none" style={{ animationDirection: "reverse" }} />
 
-      <div className="max-w-7xl mx-auto px-4 md:px-6 pt-6 pb-16 lg:pt-0 lg:pb-20 grid lg:grid-cols-12 gap-12 lg:gap-8 items-center relative">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 pt-10 pb-16 lg:pt-16 lg:pb-20 grid lg:grid-cols-12 gap-12 lg:gap-8 items-center relative">
         <div className="lg:col-span-6 relative z-10">
           <Reveal>
             <p className="flex items-center gap-3 font-telugu text-xl md:text-2xl text-maroon-600">
@@ -89,7 +89,6 @@ export function Hero() {
 
         <div className="lg:col-span-6 relative">
           <Reveal delay={150} className="relative max-w-md mx-auto lg:max-w-none">
-            <div style={{ transform: "scale(0.96) translateY(56px)" }}>
             <div className="absolute inset-0 translate-x-4 translate-y-4 arch border-2 border-gold-500/50 pointer-events-none" />
             <div className="arch border border-gold-500/70 bg-cream-50 p-3 shadow-warm">
               <div className="arch overflow-hidden aspect-[4/5]">
@@ -129,7 +128,6 @@ export function Hero() {
                 </span>
               </div>
             )}
-            </div>
           </Reveal>
         </div>
       </div>
