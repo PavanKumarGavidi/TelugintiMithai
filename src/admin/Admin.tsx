@@ -118,7 +118,7 @@ export default function Admin() {
   return (
     <div className="min-h-screen bg-cream-100 lg:flex">
       {/* sidebar */}
-      <aside className="lg:w-64 lg:min-h-screen bg-maroon-900 pattern-maroon lg:flex lg:flex-col shrink-0">
+      <aside className="lg:w-64 lg:min-h-screen bg-maroon-900 pattern-maroon lg:flex lg:flex-col shrink-0 lg:sticky lg:top-0 lg:h-screen">
         <div className="flex items-center gap-3 px-5 py-5 border-b border-cream-200/10">
           <DiyaLogo size={40} />
           <div className="leading-none">

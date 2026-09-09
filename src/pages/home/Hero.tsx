@@ -212,20 +212,19 @@ export function Offers() {
               Why Hyderabad keeps <span className="text-saffron-400">coming back</span>
             </h3>
           </Reveal>
-          <div className="mt-8 grid sm:grid-cols-2 gap-4">
-            {TRUST.map((t, i) => (
-              <Reveal key={t.title} delay={i * 100}>
-                <div className="group bg-maroon-700/45 border border-gold-500/25 rounded-xl p-5 hover:border-saffron-400/70 hover:-translate-y-1 transition-all duration-300 h-full">
-                  <span className="inline-grid place-items-center w-12 h-12 rounded-full bg-saffron-500/15 text-saffron-400 group-hover:bg-saffron-500 group-hover:text-maroon-900 transition-colors">
-                    <t.icon size={24} />
-                  </span>
-                  <h4 className="font-display text-lg text-cream-100 mt-3.5">{t.title}</h4>
-                  <p className="text-sm text-cream-200/75 mt-1 leading-relaxed">{t.sub}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
+        <div className="mt-8 grid sm:grid-cols-2 gap-4">
+          {TRUST.map((t, i) => (
+            <Reveal key={t.title} delay={i * 100}>
+              <div className="group bg-maroon-700/45 border border-gold-500/25 rounded-xl p-5 hover:border-saffron-400/70 hover:-translate-y-1 transition-all duration-300">
+                <span className="inline-grid place-items-center w-12 h-12 rounded-full bg-saffron-500/15 text-saffron-400 group-hover:bg-saffron-500 group-hover:text-maroon-900 transition-colors">
+                  <t.icon size={24} />
+                </span>
+                <h4 className="font-display text-lg text-cream-100 mt-3.5">{t.title}</h4>
+                <p className="text-sm text-cream-200/75 mt-1 leading-relaxed">{t.sub}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>        </div>
       </div>
     </section>
   );
