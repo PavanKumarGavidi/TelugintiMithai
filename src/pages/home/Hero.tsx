@@ -178,7 +178,9 @@ export function Offers() {
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <Reveal>
-            <div className="bg-cream-50 rounded-2xl shadow-warm px-8 py-9 md:px-10 min-h-[400px]">
+            <div className="bg-cream-50 rounded-2xl shadow-warm px-8 py-9 md:px-10 min-h-[400px] border-4 border-dashed border-gold-500/60 relative">
+              <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-maroon-800 rounded-full"></div>
+              <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-maroon-800 rounded-full"></div>
               <p className="font-telugu text-maroon-600 text-lg">ప్రత్యేక ఆఫర్</p>
               <h3 className="font-display text-4xl md:text-5xl text-maroon-800 leading-tight mt-1">
                 Flat <span className="text-saffron-600">{offer.pct}% OFF</span>
@@ -214,12 +216,12 @@ export function Offers() {
             <div className="grid sm:grid-cols-2 gap-5">
               {TRUST.map((t, i) => (
                 <Reveal key={t.title} delay={i * 100}>
-                  <div className="group bg-maroon-900 border-2 border-gold-500/50 rounded-2xl p-6 hover:border-saffron-400 hover:shadow-lg transition-all duration-300 min-h-[200px] flex flex-col">
-                    <span className="inline-grid place-items-center w-14 h-14 rounded-full bg-saffron-500 text-maroon-900 mb-4 flex-shrink-0">
+                  <div className="group bg-maroon-900 border-2 border-gold-500/50 rounded-2xl p-6 hover:border-saffron-400 hover:shadow-lg transition-all duration-300">
+                    <span className="inline-grid place-items-center w-14 h-14 rounded-full bg-saffron-500 text-maroon-900 mb-4">
                       <t.icon size={28} />
                     </span>
-                    <h4 className="font-display text-xl text-cream-100 mb-2 flex-shrink-0">{t.title}</h4>
-                    <p className="text-base text-cream-200 leading-relaxed flex-grow">{t.sub}</p>
+                    <h4 className="font-display text-xl text-cream-100 mb-2">{t.title}</h4>
+                    <p className="text-base text-cream-200 leading-relaxed">{t.sub}</p>
                   </div>
                 </Reveal>
               ))}
