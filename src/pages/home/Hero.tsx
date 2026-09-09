@@ -178,32 +178,30 @@ export function Offers() {
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <Reveal>
-            <div className="relative">
-              <div className="ticket-notch bg-cream-50 rounded-2xl shadow-warm px-8 py-9 md:px-10">
-                <p className="font-telugu text-maroon-600 text-lg">ప్రత్యేక ఆఫర్</p>
-                <h3 className="font-display text-4xl md:text-5xl text-maroon-800 leading-tight mt-1">
-                  Flat <span className="text-saffron-600">{offer.pct}% OFF</span>
-                  <br /> on All Items
-                </h3>
-                <p className="text-ink-500 mt-3 font-medium">
-                  Auto-applied in your cart. Valid {fmtDate(offer.start)} – {fmtDate(offer.end)}.
-                </p>
-                <div className="mt-6 flex flex-wrap items-center gap-3">
-                  <button
-                    onClick={copy}
-                    className="group flex items-center gap-3 border-2 border-dashed border-saffron-600 bg-saffron-500/10 rounded-xl px-5 py-3 hover:bg-saffron-500/20 transition-colors"
-                  >
-                    <span className="font-display text-2xl tracking-[0.18em] text-maroon-800">{offer.code}</span>
-                    <IconCopy size={19} className="text-saffron-700 group-hover:scale-110 transition-transform" />
-                  </button>
-                  <span className={`text-sm font-bold px-3 py-1.5 rounded-full ${offer.active ? "bg-leaf-600/15 text-leaf-700" : "bg-maroon-700/10 text-maroon-700"}`}>
-                    {offer.active ? "● Offer active" : "○ Offer paused"}
-                  </span>
-                </div>
-                <p className="text-[13px] text-ink-400 font-medium mt-4">
-                  {copied ? "Copied! Paste it anywhere — the cart already knows ✓" : "Tap the code to copy it. Discount reflects instantly in your cart."}
-                </p>
+            <div className="bg-cream-50 rounded-2xl shadow-warm px-8 py-9 md:px-10 min-h-[400px]">
+              <p className="font-telugu text-maroon-600 text-lg">ప్రత్యేక ఆఫర్</p>
+              <h3 className="font-display text-4xl md:text-5xl text-maroon-800 leading-tight mt-1">
+                Flat <span className="text-saffron-600">{offer.pct}% OFF</span>
+                <br /> on All Items
+              </h3>
+              <p className="text-ink-500 mt-3 font-medium">
+                Auto-applied in your cart. Valid {fmtDate(offer.start)} – {fmtDate(offer.end)}.
+              </p>
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                <button
+                  onClick={copy}
+                  className="group flex items-center gap-3 border-2 border-dashed border-saffron-600 bg-saffron-500/10 rounded-xl px-5 py-3 hover:bg-saffron-500/20 transition-colors"
+                >
+                  <span className="font-display text-2xl tracking-[0.18em] text-maroon-800">{offer.code}</span>
+                  <IconCopy size={19} className="text-saffron-700 group-hover:scale-110 transition-transform" />
+                </button>
+                <span className={`text-sm font-bold px-3 py-1.5 rounded-full ${offer.active ? "bg-leaf-600/15 text-leaf-700" : "bg-maroon-700/10 text-maroon-700"}`}>
+                  {offer.active ? "● Offer active" : "○ Offer paused"}
+                </span>
               </div>
+              <p className="text-[13px] text-ink-400 font-medium mt-4">
+                {copied ? "Copied! Paste it anywhere — the cart already knows ✓" : "Tap the code to copy it. Discount reflects instantly in your cart."}
+              </p>
             </div>
           </Reveal>
 
@@ -216,12 +214,12 @@ export function Offers() {
             <div className="grid sm:grid-cols-2 gap-5">
               {TRUST.map((t, i) => (
                 <Reveal key={t.title} delay={i * 100}>
-                  <div className="group bg-maroon-900 border-2 border-gold-500/50 rounded-2xl p-6 hover:border-saffron-400 hover:shadow-lg transition-all duration-300">
-                    <span className="inline-grid place-items-center w-14 h-14 rounded-full bg-saffron-500 text-maroon-900 mb-4">
+                  <div className="group bg-maroon-900 border-2 border-gold-500/50 rounded-2xl p-6 hover:border-saffron-400 hover:shadow-lg transition-all duration-300 min-h-[200px] flex flex-col">
+                    <span className="inline-grid place-items-center w-14 h-14 rounded-full bg-saffron-500 text-maroon-900 mb-4 flex-shrink-0">
                       <t.icon size={28} />
                     </span>
-                    <h4 className="font-display text-xl text-cream-100 mb-2">{t.title}</h4>
-                    <p className="text-base text-cream-200 leading-relaxed">{t.sub}</p>
+                    <h4 className="font-display text-xl text-cream-100 mb-2 flex-shrink-0">{t.title}</h4>
+                    <p className="text-base text-cream-200 leading-relaxed flex-grow">{t.sub}</p>
                   </div>
                 </Reveal>
               ))}
