@@ -1,4 +1,4 @@
-import { useMemo, useState, type ChangeEvent, type FormEvent } from "react";
+import { useEffect, useMemo, useState, type ChangeEvent, type FormEvent } from "react";
 import {
   IconChevronDown,
   IconCopy,
@@ -526,6 +526,11 @@ export function OffersPanel() {
   const { offer, updateOffer, toast } = useStore();
   const [f, setF] = useState({ ...offer, pct: String(offer.pct) });
 
+  // Sync form state when offer changes in store
+  useEffect(() => {
+    setF({ ...offer, pct: String(offer.pct) });
+  }, [offer]);
+
   const save = (e: FormEvent) => {
     e.preventDefault();
     const pct = Math.max(0, Math.min(90, Number(f.pct) || 0));
@@ -575,7 +580,7 @@ export function OffersPanel() {
       </form>
 
       <Reveal delay={120}>
-        <div className="ticket-notch bg-maroon-800 pattern-maroon rounded-2xl p-8 text-center border border-gold-500/30 shadow-warm">
+        <div className="bg-maroon-800 pattern-maroon rounded-2xl p-8 text-center border border-gold-500/30 shadow-warm overflow-hidden">
           <p className="font-telugu text-saffron-400">లైవ్ ప్రివ్యూ</p>
           <h3 className="font-display text-3xl text-cream-100 mt-1">{f.title || "Special Offer"}</h3>
           <p className="font-display text-6xl text-saffron-400 mt-3">{f.pct || 0}%</p>

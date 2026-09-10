@@ -30,7 +30,7 @@ export function Hero() {
       <Mandala className="absolute -top-28 -right-28 w-[420px] h-[420px] text-gold-500/50 spin-slow pointer-events-none" />
       <Mandala className="absolute -bottom-40 -left-40 w-[380px] h-[380px] text-maroon-600/20 pointer-events-none" style={{ animationDirection: "reverse" }} />
 
-      <div className="max-w-7xl mx-auto px-4 md:px-6 pt-10 pb-16 lg:pt-16 lg:pb-20 grid lg:grid-cols-12 gap-12 lg:gap-8 items-center relative">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 pt-4 pb-16 lg:pt-6 lg:pb-20 grid lg:grid-cols-12 gap-12 lg:gap-8 items-center relative">
         <div className="lg:col-span-6 relative z-10">
           <Reveal>
             <p className="flex items-center gap-3 font-telugu text-xl md:text-2xl text-maroon-600">
@@ -174,11 +174,13 @@ export function Offers() {
   };
 
   return (
-    <section id="offers" className="bg-maroon-800 pattern-maroon relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-20 grid lg:grid-cols-2 gap-12 items-center">
-        <Reveal>
-          <div className="relative">
-            <div className="ticket-notch bg-cream-50 rounded-2xl shadow-warm px-8 py-9 md:px-10">
+    <section id="offers" className="bg-maroon-800 relative py-16 md:py-20">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          <Reveal>
+            <div className="bg-cream-50 rounded-2xl shadow-warm px-8 py-9 md:px-10 min-h-[400px] border-4 border-dashed border-gold-500/60 relative">
+              <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-maroon-800 rounded-full"></div>
+              <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-maroon-800 rounded-full"></div>
               <p className="font-telugu text-maroon-600 text-lg">ప్రత్యేక ఆఫర్</p>
               <h3 className="font-display text-4xl md:text-5xl text-maroon-800 leading-tight mt-1">
                 Flat <span className="text-saffron-600">{offer.pct}% OFF</span>
@@ -203,27 +205,27 @@ export function Offers() {
                 {copied ? "Copied! Paste it anywhere — the cart already knows ✓" : "Tap the code to copy it. Discount reflects instantly in your cart."}
               </p>
             </div>
-          </div>
-        </Reveal>
-
-        <div>
-          <Reveal delay={100}>
-            <h3 className="font-display text-3xl md:text-4xl text-cream-100">
-              Why Hyderabad keeps <span className="text-saffron-400">coming back</span>
-            </h3>
           </Reveal>
-          <div className="mt-8 grid sm:grid-cols-2 gap-4">
-            {TRUST.map((t, i) => (
-              <Reveal key={t.title} delay={i * 100}>
-                <div className="group bg-maroon-700/45 border border-gold-500/25 rounded-xl p-5 hover:border-saffron-400/70 hover:-translate-y-1 transition-all duration-300 h-full">
-                  <span className="inline-grid place-items-center w-12 h-12 rounded-full bg-saffron-500/15 text-saffron-400 group-hover:bg-saffron-500 group-hover:text-maroon-900 transition-colors">
-                    <t.icon size={24} />
-                  </span>
-                  <h4 className="font-display text-lg text-cream-100 mt-3.5">{t.title}</h4>
-                  <p className="text-sm text-cream-200/75 mt-1 leading-relaxed">{t.sub}</p>
-                </div>
-              </Reveal>
-            ))}
+
+          <div>
+            <Reveal delay={100}>
+              <h3 className="font-display text-3xl md:text-4xl text-cream-100 mb-8">
+                Why Hyderabad keeps <span className="text-saffron-400">coming back</span>
+              </h3>
+            </Reveal>
+            <div className="grid sm:grid-cols-2 gap-5">
+              {TRUST.map((t, i) => (
+                <Reveal key={t.title} delay={i * 100}>
+                  <div className="group bg-maroon-900 border-2 border-gold-500/50 rounded-2xl p-6 hover:border-saffron-400 hover:shadow-lg transition-all duration-300">
+                    <span className="inline-grid place-items-center w-14 h-14 rounded-full bg-saffron-500 text-maroon-900 mb-4">
+                      <t.icon size={28} />
+                    </span>
+                    <h4 className="font-display text-xl text-cream-100 mb-2">{t.title}</h4>
+                    <p className="text-base text-cream-200 leading-relaxed">{t.sub}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </div>
       </div>

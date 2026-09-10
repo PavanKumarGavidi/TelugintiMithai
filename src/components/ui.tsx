@@ -3,6 +3,7 @@ import {
   useEffect,
   useRef,
   useState,
+  useSyncExternalStore,
   type CSSProperties,
   type ReactNode,
 } from "react";
@@ -362,7 +363,78 @@ export function Mandala({ className = "", style }: { className?: string; style?:
   );
 }
 
+/* ---------- custom logo detection ----------
+   Drop your logo at public/logo.png (or logo.jpg / logo.jpeg) and rebuild —
+   it replaces the diya mark everywhere, including the browser tab.
+   Without the file, the original hand-drawn diya logo is kept. */
+
+const LOGO_CANDIDATES = ["logo.png", "logo.jpg", "logo.jpeg"].map(
+  (f) => `${import.meta.env.BASE_URL}${f}`,
+);
+
+let logoUrl: string | null | undefined;
+const logoListeners = new Set<() => void>();
+
+function emitLogo() {
+  logoListeners.forEach((l) => l());
+  if (logoUrl) {
+    const link = document.querySelector<HTMLLinkElement>("link[rel='icon']");
+    if (link) {
+      link.type = logoUrl.endsWith(".png") ? "image/png" : "image/jpeg";
+      link.href = logoUrl;
+    }
+  }
+}
+
+function probeCustomLogo() {
+  if (logoUrl !== undefined) return;
+  let i = 0;
+  const tryNext = () => {
+    if (i >= LOGO_CANDIDATES.length) {
+      logoUrl = null;
+      emitLogo();
+      return;
+    }
+    const url = LOGO_CANDIDATES[i++];
+    const img = new Image();
+    img.onload = () => {
+      logoUrl = url;
+      emitLogo();
+    };
+    img.onerror = tryNext;
+    img.src = url;
+  };
+  tryNext();
+}
+
+if (typeof window !== "undefined") probeCustomLogo();
+
+export function useCustomLogo(): string | null {
+  return useSyncExternalStore(
+    (cb) => {
+      logoListeners.add(cb);
+      probeCustomLogo();
+      return () => logoListeners.delete(cb);
+    },
+    () => logoUrl ?? null,
+  );
+}
+
 export function DiyaLogo({ size = 40 }: { size?: number }) {
+  const custom = useCustomLogo();
+  if (custom) {
+    return (
+      <img
+        src={custom}
+        alt=""
+        aria-hidden="true"
+        width={size}
+        height={size}
+        draggable={false}
+        className="rounded-2xl object-cover shrink-0 select-none ring-1 ring-gold-500/40 shadow-card"
+      />
+    );
+  }
   return (
     <svg viewBox="0 0 64 64" width={size} height={size} aria-hidden="true">
       <rect width="64" height="64" rx="16" fill="var(--color-maroon-700)" />
