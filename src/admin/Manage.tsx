@@ -1,4 +1,4 @@
-import { useMemo, useState, type ChangeEvent, type FormEvent } from "react";
+import { useEffect, useMemo, useState, type ChangeEvent, type FormEvent } from "react";
 import {
   IconChevronDown,
   IconCopy,
@@ -525,6 +525,11 @@ export function ReviewsPanel() {
 export function OffersPanel() {
   const { offer, updateOffer, toast } = useStore();
   const [f, setF] = useState({ ...offer, pct: String(offer.pct) });
+
+  // Sync form state when offer changes in store
+  useEffect(() => {
+    setF({ ...offer, pct: String(offer.pct) });
+  }, [offer]);
 
   const save = (e: FormEvent) => {
     e.preventDefault();
